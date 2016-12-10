@@ -13,12 +13,26 @@ let Task = db.define( 'task', {
 	title: Sequelize.STRING,
 	finished: Sequelize.BOOLEAN
 })
-
+//Get all tasks
 router.get('/tasks', (req, res, next) => {
 		Task.findAll().then((tasks)=> {
 			res.send(tasks)
 		})
 	})
+
+//Get single task
+router.get('/task/:task_id', (req, res, next) => {
+	let task = req.params.task_id
+	Task.findOne({
+		where: {
+			id: task
+		}
+	} ).then((thing) => {
+		res.send(thing)
+	})
+})
+
+
 db.sync( {force: true} ).then( ()=> {
 	Task.create( {
 		title: "Make tasklist app",
