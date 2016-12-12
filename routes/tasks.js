@@ -32,7 +32,7 @@ router.get('/task/:task_id', (req, res, next) => {
 	})
 })
 //Save new task
-router.post('/task' (req, res, next) => {
+router.post('/task', (req, res, next) => {
 	let task = req.body.title
 	if (!task.title || (task.finished + '')) {
 		res.status(400)
@@ -60,33 +60,33 @@ router.delete('/task/:task_id', (req, res, next) => {
 })
 
 //edit task
-router.put('/task/:task_id', (req, res, next) => {
-	let task = req.body.title
-	let updTask = {}
+// router.put('/task/:task_id', (req, res, next) => {
+// 	let task = req.body.title
+// 	let updTask = {}
 
-	if(task.finished){
-		updTask.finished = task.finished
-	}
+// 	if(task.finished){
+// 		updTask.finished = task.finished
+// 	}
 
-	if(task.title){
-		updTask.title = task.title
-	}
+// 	if(task.title){
+// 		updTask.title = task.title
+// 	}
 
-	if(!updTask) {
-		res.status(400)
-		res.send({
-			"error": "Bad Data"
-		})
-	} else {
-		Task.set({
-		where: {
-			id: task
-			}, updTask, {}
-		}).then(updatedtask => {
-			res.send(updatedtask)
-			})
-		}	
-})
+// 	if(!updTask) {
+// 		res.status(400)
+// 		res.send({
+// 			"error": "Bad Data"
+// 		})
+// 	} else {
+// 		Task.set({
+// 		where: {
+// 			id: task
+// 			}, updTask, {}
+// 		}).then(updatedtask => {
+// 			res.send(updatedtask)
+// 			})
+// 		}	
+// })
 
 db.sync( {force: true} ).then( ()=> {
 	Task.create( {
