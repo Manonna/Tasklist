@@ -28,34 +28,36 @@ router.get('/task/:task_id', (req, res, next) => {
 			id: task
 		}
 	} ).then((singletask) => {
-		res.send(singletask)
+		res.json(singletask)
 	})
 })
 //Save new task
 router.post('/task', (req, res, next) => {
-	let task = req.body.title
-	if (!task.title || (task.finished + '')) {
-		res.status(400)
-		res.send({"error": "Bad Data"})
+	var task = req.body;
+	console.log("hello "  + task.title)
+	if (!task.title || !(task.finished + '')) {
+		res.status(400);
+		res.json({"error": "Bad Data"});
 	} else {
+		console.log("this is the task" + task)
 		Task.create(task, (err, task) => {
 			if (err) {
-				throw err
+				res.send(err);
 			}
-			res.send(task)
+			res.json(task);
 		})
 	}
 })
 
 //remove task
 router.delete('/task/:task_id', (req, res, next) => {
-	let task = req.params.task_id
-	Task.remove({
+	var task = req.params.task_id
+	Task.destroy({
 		where: {
 			id: task
 		}
 	}).then(deletedtask => {
-		res.send(deletedtask)
+		res.json(deletedtask)
 	})
 })
 

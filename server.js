@@ -18,8 +18,8 @@ app.engine('html', require('ejs').renderFile)
 app.use(express.static(path.join(__dirname, 'client')))
 
 //Boddy parser middleware
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({extended: false}))
+ app.use(bodyParser.json())
+ app.use(bodyParser.urlencoded({extended: false}))
 
 app.use('/', index)
 app.use('/api', tasks)

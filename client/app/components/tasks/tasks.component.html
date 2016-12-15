@@ -1,6 +1,6 @@
-<form class="well">
+<form class="well" (submit)="addTask($event)">
 	<div class="form-group">
-		<input type="text" class="form-control" placeholder="Watcha wanna do?">
+		<input type="text" [(ngModel)]="title" name="title" class="form-control" placeholder="Watcha wanna do?">
 	</div>
 </form>
 
@@ -13,7 +13,8 @@
 			{{task.title}}
 		</div>
 		<div class="col-md-4">
-			<input type="button" value="Delete" class="btn btn-danger">
+			<input type="button" (click)="deleteTask(task.id)" value="Delete" class="btn btn-danger">
 		</div>
+		<br><br>
 	</div>
 </div>

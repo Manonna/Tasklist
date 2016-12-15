@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require("@angular/core");
 const http_1 = require("@angular/http");
+require("rxjs/add/observable/from");
 require("rxjs/add/operator/map");
 let TaskService = class TaskService {
     constructor(http) {
@@ -18,6 +19,16 @@ let TaskService = class TaskService {
     }
     getTasks() {
         return this.http.get('http://localhost:3000/api/tasks')
+            .map(res => res.json());
+    }
+    addTask(newTask) {
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('http://localhost:3000/api/task', JSON.stringify(newTask), { headers: headers })
+            .map(res => res.json());
+    }
+    deleteTask(id) {
+        return this.http.delete('/api/task/' + id)
             .map(res => res.json());
     }
 };
