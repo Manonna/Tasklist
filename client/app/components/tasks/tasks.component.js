@@ -15,7 +15,7 @@ let TasksComponent = class TasksComponent {
         this.taskService = taskService;
         this.taskService.getTasks()
             .subscribe(tasks => {
-            console.log(tasks);
+            this.tasks = tasks;
         });
     }
 };

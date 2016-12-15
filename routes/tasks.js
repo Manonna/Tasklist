@@ -89,9 +89,17 @@ router.delete('/task/:task_id', (req, res, next) => {
 // })
 
 db.sync( {force: true} ).then( ()=> {
-	Task.create( {
+	Task.bulkCreate( [{
 		title: "Make tasklist app",
 		finished: false
-	})
+	},
+	{
+		title: "Be awesome",
+		finished: false
+	},
+	{
+		title: "Do cool stuff",
+		finished: false
+	}])
 })
 module.exports = router
