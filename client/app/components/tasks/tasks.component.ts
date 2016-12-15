@@ -1,11 +1,15 @@
 import { Component } from '@angular/core'
+import { ChangeDetectionStrategy } from '@angular/core'
 import { TaskService } from '../../services/task.service'
 import { Task } from '../../../task'
 
 @Component({
 	selector: 'tasks',
+	changeDetection: ChangeDetectionStrategy.Default,
 	templateUrl: 'app/components/tasks/tasks.component.html'
 })
+
+
 
 export class TasksComponent { 
 	tasks: Task[];
@@ -14,6 +18,7 @@ export class TasksComponent {
 	constructor(private taskService:TaskService){
 		this.taskService.getTasks()
 			.subscribe(tasks => {
+				console.log("ik werk wel")
 				this.tasks = tasks
 			})
 	}
@@ -33,19 +38,19 @@ export class TasksComponent {
 			.subscribe(task => {
 				this.tasks.push(task);
 				this.title = '';
-			})
+			}, err => { console.log("error", err);}, () => console.log("klaar"))
 	}
 
 	deleteTask(id) {
 		var tasks = this.tasks;
 		this.taskService.deleteTask(id).subscribe(data => {
-				if(data.n == 1) {
-					for(var i = 0; i <tasks.length; i++) {
-						if(tasks[i].id == id) {
-							tasks.splice(i, 1);
-						}
+			if(data.n == 1) {
+				for(var i = 0; i <tasks.length; i++) {
+					if(tasks[i].id == id) {
+						tasks.splice(i, 1);
 					}
 				}
-			})
+			}
+		})
 	}
 }

@@ -14,14 +14,14 @@ let Task = db.define( 'task', {
 	finished: Sequelize.BOOLEAN
 })
 //Get all tasks
-router.get('/tasks', (req, res, next) => {
+router.get('/tasks', (req, res) => {
 		Task.findAll().then((tasks)=> {
 			res.send(tasks)
 		})
 	})
 
 //Get single task
-router.get('/task/:task_id', (req, res, next) => {
+router.get('/task/:task_id', (req, res) => {
 	let task = req.params.task_id
 	Task.findOne({
 		where: {
@@ -32,25 +32,27 @@ router.get('/task/:task_id', (req, res, next) => {
 	})
 })
 //Save new task
-router.post('/task', (req, res, next) => {
+router.post('/task', (req, res) => {
 	var task = req.body;
 	console.log("hello "  + task.title)
 	if (!task.title || !(task.finished + '')) {
-		res.status(400);
-		res.json({"error": "Bad Data"});
+		res.status(400)
+		res.json({"error": "Bad Data"})
 	} else {
 		console.log("this is the task" + task)
 		Task.create(task, (err, task) => {
 			if (err) {
-				res.send(err);
+				res.send(err)
 			}
-			res.json(task);
+		}).then(task => {
+			console.log("ik stuur shit")
+			res.json(task)
 		})
 	}
 })
 
 //remove task
-router.delete('/task/:task_id', (req, res, next) => {
+router.delete('/task/:task_id', (req, res) => {
 	var task = req.params.task_id
 	Task.destroy({
 		where: {

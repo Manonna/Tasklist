@@ -9,12 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require("@angular/core");
+const core_2 = require("@angular/core");
 const task_service_1 = require("../../services/task.service");
 let TasksComponent = class TasksComponent {
     constructor(taskService) {
         this.taskService = taskService;
         this.taskService.getTasks()
             .subscribe(tasks => {
+            console.log("ik werk wel");
             this.tasks = tasks;
         });
     }
@@ -31,7 +33,7 @@ let TasksComponent = class TasksComponent {
             .subscribe(task => {
             this.tasks.push(task);
             this.title = '';
-        });
+        }, err => { console.log("error", err); }, () => console.log("klaar"));
     }
     deleteTask(id) {
         var tasks = this.tasks;
@@ -49,6 +51,7 @@ let TasksComponent = class TasksComponent {
 TasksComponent = __decorate([
     core_1.Component({
         selector: 'tasks',
+        changeDetection: core_2.ChangeDetectionStrategy.Default,
         templateUrl: 'app/components/tasks/tasks.component.html'
     }),
     __metadata("design:paramtypes", [task_service_1.TaskService])
