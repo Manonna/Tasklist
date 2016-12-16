@@ -20,7 +20,6 @@ let TaskService = class TaskService {
     getTasks() {
         return this.http.get('http://localhost:3000/api/tasks')
             .map((res) => res.json());
-        ;
     }
     addTask(newTask) {
         var headers = new http_1.Headers();

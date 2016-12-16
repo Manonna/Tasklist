@@ -45,7 +45,7 @@ router.post('/task', (req, res) => {
 				res.send(err)
 			}
 		}).then(task => {
-			console.log("ik stuur shit")
+			console.log("ik stuur dingen")
 			res.json(task)
 		})
 	}
@@ -59,6 +59,7 @@ router.delete('/task/:task_id', (req, res) => {
 			id: task
 		}
 	}).then(deletedtask => {
+		console.log("ik verwijder dingen " + deletedtask)
 		res.json(deletedtask)
 	})
 })

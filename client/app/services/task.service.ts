@@ -11,7 +11,7 @@ export class TaskService{
 
 	getTasks(){
 		return this.http.get('http://localhost:3000/api/tasks')
-		.map((res: Response) => res.json()));
+		.map((res: Response) => res.json());
 	}
 
 	addTask(newTask){
