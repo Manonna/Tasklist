@@ -65,33 +65,58 @@ router.delete('/task/:task_id', (req, res) => {
 })
 
 //edit task
-// router.put('/task/:task_id', (req, res, next) => {
-// 	let task = req.body.title
-// 	let updTask = {}
+router.put('/task/:task_id', (req, res) => {
+	// let task = req.params.task_id
+	// Task.findOne({
+	// 	where: {
+	// 		id: req.params.id
+	// 	}
+	// }).then (task)=> {
+	// 	if(task) {
+	// 		task.updateAttributes({
+	// 			title: req.body.title,
+	// 			finished: req.body.finished
+	// 		}).then (todo) => {
+	// 			res.send(todo);
+	// 		}
+	// 	}
+	// }
 
-// 	if(task.finished){
-// 		updTask.finished = task.finished
-// 	}
 
-// 	if(task.title){
-// 		updTask.title = task.title
-// 	}
+	let task = req.params.task_id;
+	let updTask = {};
 
-// 	if(!updTask) {
-// 		res.status(400)
-// 		res.send({
-// 			"error": "Bad Data"
-// 		})
-// 	} else {
-// 		Task.set({
-// 		where: {
-// 			id: task
-// 			}, updTask, {}
-// 		}).then(updatedtask => {
-// 			res.send(updatedtask)
-// 			})
-// 		}	
-// })
+	if(task.finished){
+		updTask.finished = task.finished
+		console.log("finished")
+	}
+
+	if(task.title){
+		updTask.title = task.title
+		console.log("title")
+	}
+
+	if(!updTask) {
+		res.status(400)
+		res.send({
+			"error": "Bad Data"
+		})	
+	} else {
+		console.log("Vinkjes vinkjes vinkjes" + task)
+		//Task.findOne( */finish thisss!!*/)
+		Task.update({
+			finished: true},
+			{
+				where: {
+					id: task
+					}
+
+		}).then(updatedtask => {
+
+			res.send(updatedtask)
+			})
+		}	
+})
 
 db.sync( {force: true} ).then( ()=> {
 	Task.bulkCreate( [{

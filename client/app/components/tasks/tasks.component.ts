@@ -49,4 +49,15 @@ export class TasksComponent {
 			
 		})
 	}
+
+	updateStatus(task){
+		var _task = {
+			_id: task.id,
+			title: task.title,
+			finished: !task.finished
+		};
+		this.taskService.updateStatus(_task).subscribe(data => {
+			task.finished = !task.finished;
+		})
+	}
 }

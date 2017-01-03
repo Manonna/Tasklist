@@ -36,6 +36,13 @@ let TaskService = class TaskService {
         return this.http.delete('/api/task/' + id)
             .map(res => res.json());
     }
+    updateStatus(task) {
+        console.log(task);
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.put('http://localhost:3000/api/task/' + task._id, JSON.stringify(task), { headers: headers })
+            .map(res => res.json());
+    }
 };
 TaskService = __decorate([
     core_1.Injectable(),
