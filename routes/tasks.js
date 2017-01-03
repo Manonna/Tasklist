@@ -66,23 +66,6 @@ router.delete('/task/:task_id', (req, res) => {
 
 //edit task
 router.put('/task/:task_id', (req, res) => {
-	// let task = req.params.task_id
-	// Task.findOne({
-	// 	where: {
-	// 		id: req.params.id
-	// 	}
-	// }).then (task)=> {
-	// 	if(task) {
-	// 		task.updateAttributes({
-	// 			title: req.body.title,
-	// 			finished: req.body.finished
-	// 		}).then (todo) => {
-	// 			res.send(todo);
-	// 		}
-	// 	}
-	// }
-
-
 	let task = req.params.task_id;
 	let updTask = {};
 
@@ -103,16 +86,13 @@ router.put('/task/:task_id', (req, res) => {
 		})	
 	} else {
 		console.log("Vinkjes vinkjes vinkjes" + task)
-		//Task.findOne( */finish thisss!!*/)
 		Task.update({
 			finished: true},
 			{
 				where: {
 					id: task
 					}
-
 		}).then(updatedtask => {
-
 			res.send(updatedtask)
 			})
 		}	

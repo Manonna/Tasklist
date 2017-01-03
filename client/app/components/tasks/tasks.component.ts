@@ -17,7 +17,6 @@ export class TasksComponent {
 	constructor(private taskService:TaskService){
 		this.taskService.getTasks()
 			.subscribe(tasks => {
-				console.log("ik werk wel")
 				this.tasks = tasks
 			})
 	}
